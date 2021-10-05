@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
 body {font-family: Arial, Helvetica, sans-serif;}
 
 /* The Modal (background) */
@@ -45,8 +46,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 </style>
 </head>
+
 <body>
-<?php
+    <?php
 $arr=array(
     '1'=>'a',
     '2'=>'b',
@@ -62,31 +64,23 @@ $data=array(
     '2010-10-23'=>'nota d',
     '2010-10-24'=>'nota e',
 );
-print_r($arr);
+//print_r($arr);
 ?>
-<script>
-
-</script>
-<button type=""></button>
-
-<h2>Modal Example</h2>
-
-<!-- Trigger/Open The Modal -->
-<button id="myBtn">Open Modal</button>
 
 
-<table border="1">
-      <thead>
-          <tr>
-              <th>nota</th>
-              <th>fecha</th>
-              <th></th>
-              <th >acciones</th>
+    <form action="#">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>nota</th>
+                    <th>fecha</th>
+                    <th></th>
+                    <th>acciones</th>
 
-          </tr>
-      </thead>
-      <tbody>
-        <?php 
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
         foreach ($arr as $id => $abc) {
            echo('<tr>');
            echo("<td>$id </td>");
@@ -94,58 +88,89 @@ print_r($arr);
            echo("<td>");
            $conta=0;
            foreach ($data as $fecha => $nota) {
+               
             $datos[$id]=$fecha;
-
+          
            }
-           echo('<pre>');
-           print_r($datos);
+     
+                echo('<pre>');
+            print_r($datos);
+          // $dats="'.'json_encode($datos)'.'";
            echo("</td>");
+
+       
+            //$result = "'" . implode ( "', '", $temp ) . "'";
+            //$result = "'" . implode ( "', '", $dats ) . "'";
+
+            //echo $result;
+           ?>
+                <td>
+
+                    <button onclick="funcion('<?php echo $id ?>')" id="myBtn<?php echo $id ?>">Open Modal</button>
+
+                </td>
+                <div style="opacity: 1; display:none;/* position: absolute;*/" id="myModal<?php echo $id ?>"  class="modal">
+
+                    <!-- Modal content -->
+                    
+                    <div class="modal-content">
+                        <span  onclick="cerrar('<?php echo $id ?>')" class="close">&times;</span>
+                       
+                        <?php
+                        foreach ($datos as $key => $value) {
+                           echo($key);
+                        }?>
+                    </div>
+                </div>
+                <?php
            echo('</tr>');
         }
         ?>
-      </tbody>
-  </table>
-  
-<!-- The Modal -->
-<div id="myModal" class="modal">
+            </tbody>
+        </table>
+    </form>
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-  </div>
+    <script>
+      
 
+        function funcion(id) {
+            console.log(id)
+            // Get the modal
+            
+            mymodal='myModal'+id;
+            let modal = document.getElementById(mymodal);
+            document.getElementById(mymodal).style.opacity = "1";
+             //let myBtn2=
 
+            // // Get the button that opens the modal
+            // let btn = document.getElementById("myBtn2");
+            // console.log(btn.value)
 
-</div>
+            // // Get the <span> element that closes the modal
+             let span = document.getElementsByClassName("close")[0];
 
-<script>
-// Get the modal
-var modal = document.getElementById("myModal");
+            // // When the user clicks the button, open the modal 
+            // btn.onclick = function () {
+                 modal.style.display = "block";
+            // }
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+            // When the user clicks on <span> (x), close the modal
+      
+        }
+        function cerrar(id) {
+            console.log(id)
+            // Get the modal
+            
+            mymodal='myModal'+id;
+            let modal = document.getElementById(mymodal);
+            document.getElementById(mymodal).style.opacity = "0";
+            document.getElementById(mymodal).style.display = "none";
+        
+          
+        }
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks the button, open the modal 
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
-
+        
+    </script>
 </body>
+
 </html>
